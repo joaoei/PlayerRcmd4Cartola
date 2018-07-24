@@ -1,6 +1,8 @@
 
 import React, { Component } from 'react';
 import {Navbar, Nav, NavItem, Glyphicon} from 'react-bootstrap';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import {Home, InfoTeam, PlayerRcmd} from './components';
 import './App.css';
 
 class App extends Component {
@@ -10,7 +12,7 @@ class App extends Component {
         <Navbar inverse collapseOnSelect className="App-header">
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#home">PlayerRcmd4Cartola</a>
+              <a href="/">PlayerRcmd4Cartola</a>
               {/*
                   - Show cartola market closure
                       # Status: 2 = close
@@ -29,7 +31,7 @@ class App extends Component {
 
           <Navbar.Collapse>
             <Nav>
-              <NavItem eventKey={1} href="#" selected>
+              <NavItem eventKey={1} href="/players-rcmd" selected>
                 <Glyphicon glyph="fire"/> Players recommendation
                   {/*
                     https://api.cartolafc.globo.com/partidas
@@ -38,7 +40,7 @@ class App extends Component {
                   */}
               </NavItem>
 
-              <NavItem eventKey={1} href="#">
+              <NavItem eventKey={1} href="/infoteam">
                 <Glyphicon glyph="info-sign" /> Information about your team
                   {/*
                     https://api.cartolafc.globo.com/times?q=
@@ -53,6 +55,13 @@ class App extends Component {
         </Navbar>
 
         <div className="App-content">
+          <BrowserRouter>
+            <Switch>
+                <Route path="/" exact={true} component={Home} />
+                <Route path="/players-rcmd" component={PlayerRcmd} />
+                <Route path="/infoteam" component={InfoTeam} />
+            </Switch>
+          </BrowserRouter>
         </div>
       </div>
     );
