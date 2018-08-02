@@ -1,0 +1,13 @@
+.MarketInfo {
+	border-left: 15px solid #FF794C;
+	border-right: 15px solid #FF794C;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.MarketInfo h2, h3 {
+	margin-right: 10px;
+	margin-left: 10px;
+	word-wrap: break-word;
+	color: #333;
+}

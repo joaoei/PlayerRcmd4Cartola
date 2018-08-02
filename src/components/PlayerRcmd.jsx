@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+	/*
+                    https://api.cartolafc.globo.com/partidas
+                    e
+                    https://api.cartolafc.globo.com/atletas/mercado
+                  */
 class PlayerRcmd extends Component {
   render() {
     return (
