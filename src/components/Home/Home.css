@@ -1,11 +1,17 @@
-.MarketInfo {
+@import url('https://fonts.googleapis.com/css?family=Patua+One');
+
+.Content {
 	border-left: 15px solid #FF794C;
 	border-right: 15px solid #FF794C;
 	border-radius: 5px;
 	text-align: center;
+	background-color: #f4f4f4;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	margin: 10px 0px;
 }
 
-.MarketInfo h2, h3 {
+.Content p, {
 	margin-right: 10px;
 	margin-left: 10px;
 	word-wrap: break-word;

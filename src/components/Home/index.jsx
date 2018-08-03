@@ -77,14 +77,16 @@ class Home extends Component {
 			games: []
 		};
 
-		this.callApi = this.callApi.bind(this);
+		this.callApiStatus = this.callApiStatus.bind(this);
+    this.callApiPlayers = this.callApiPlayers.bind(this);
 	}
 
   componentDidMount() {
-		this.callApi();
+    this.callApiStatus();
+		this.callApiPlayers();
   }
 
-  callApi = async () => {
+  callApiStatus = async () => {
 		const response = await fetch('/api/status');
 		
     const res = await response.json();
@@ -92,7 +94,6 @@ class Home extends Component {
 		if (response.status !== 200) throw Error(res.message);
     
     let dados = res.data.fechamento;
-    console.log(res.data);
 
     this.setState({
       info_market: {
@@ -104,18 +105,50 @@ class Home extends Component {
         status: res.data.status_mercado
       }
     });
+  };
 
+  callApiPlayers = async () => {
+    const response = await fetch('/api/destaques');
+    
+    const res = await response.json();
+
+    if (response.status !== 200) throw Error(res.message);
+    
+    console.log(res.data);
+
+    this.setState({
+      players: res.data
+    });
   };
 
 	render() {
     let state  = this.state.info_market;
+    let color = this.state.info_market.status === 1 ? "green" : "#990303";
+    let t = {
+      color: color
+    }
     
     return (
-      <div className="MarketInfo">
-      	<h2>
-          {monthName(state.month)} {state.day}, {state.year} at {state.hour}:{state.minute < 10 ? "0"+state.minute : state.minute}
-        </h2>
-        <h3>{this.state.info_market.status === 1 ? "Open market" : "Closed market"}</h3>
+      <div>
+        <div className="Content">
+          <h2>Market Info</h2>
+          <p style={t}>{this.state.info_market.status === 1 ? "Open market" : "Closed market"}</p>
+          <p>
+            Until {monthName(state.month)} {state.day}, {state.year} at {state.hour}:{state.minute < 10 ? "0"+state.minute : state.minute}
+          </p>
+        </div>
+
+        <div className="Content">
+          <h2>Most selected players</h2>
+
+          {this.state.players.map(function (player, i) {
+            return (
+              <div key={i}>
+              <p> {player.Atleta.apelido}, {player.posicao} do {player.clube} - {player.escalacoes.toLocaleString('pt-BR') }</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }

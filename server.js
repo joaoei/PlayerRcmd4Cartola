@@ -15,4 +15,14 @@ app.get('/api/status', (req, res) => {
   });
 });
 
+app.get('/api/destaques', (req, res) => {
+	axios.get('https://api.cartolafc.globo.com/mercado/destaques')
+  .then(response => {
+    res.send({ data: response.data });
+  })
+  .catch(error => {
+    res.send({ data: error });
+  });
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
